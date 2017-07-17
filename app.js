@@ -1,6 +1,7 @@
 'use strict';
 
-// object literals
+
+// first and pike
 
 var firstPike = {
   name: '1st and Pike',
@@ -8,6 +9,8 @@ var firstPike = {
   maxHourlyCust: 65,
   avgCookiePerSale: 6.3,
   hour: ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'],
+  cookiesPurchased: [],
+  totalCookies: 0,
 
   // generate random number for customer per hour
   custPerHour: function() {
@@ -23,18 +26,22 @@ var firstPike = {
   render: function() {
     var firstPikeUL = document.getElementById('firstAndPike');
 
-    // this will render the data to the dom
-    // will need a for loop to iterate over the array
-      for (var i = 0; i < this.hour.length; i++) {
-      // there are three parts to this process
-      // 1. create an element
+    for (var i = 0; i < this.hour.length; i++) {
+      this.cookiesPurchased.push(Math.round(this.numCookies()));
       var liEl = document.createElement('li');
-      // 2. give it content
-      liEl.textContent = this.hour[i] + ': ' + Math.round(this.numCookies()) + ' cookies';
-      // 3. append it to a certain place in the dom
-      // parentElement.appendChild(childElement)
+      liEl.textContent = this.hour[i] + ': ' + this.cookiesPurchased[i] + ' cookies';
       firstPikeUL.appendChild(liEl);
     }
+
+    // calculate the total number of cookies
+    for (var i = 0; i < this.cookiesPurchased.length; i++) {
+      this.totalCookies += this.cookiesPurchased[i];
+    }
+    // display total number of cookies to the DOM
+    var liEl = document.createElement('li');
+    liEl.textContent = 'Total: ' + this.totalCookies + ' cookies';
+    firstPikeUL.appendChild(liEl);
+
   }
 };
 
