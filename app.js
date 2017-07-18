@@ -1,6 +1,29 @@
 'use strict';
 
-var hours = ['6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm'];
+var hours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'];
+
+// create header row
+
+function header() {
+  // create empty box in top left
+  var thEl = document.createElement('th');
+  thEl.textContent = '';
+  storeList.appendChild(thEl);
+
+  // add hours to header
+  for (var i = 0; i < hours.length; i++) {
+    var thEl = document.createElement('th');
+    thEl.textContent = hours[i];
+    storeList.appendChild(thEl);
+  }
+
+  // add total to header
+  var thEl = document.createElement('th');
+  thEl.textContent = 'Daily Total';
+  storeList.appendChild(thEl);
+}
+
+header();
 
 
 // constructor funciton for a store
@@ -33,18 +56,21 @@ function Store(name, minHourlyCust, maxHourlyCust, avgCookiePerSale) {
 
     var trEl = document.createElement('tr');
 
+    // add name to beginning of table row
     var tdEl = document.createElement('td');
     tdEl.textContent = this.name;
     trEl.appendChild(tdEl);
 
+    // add table data for each hour
     for (var i = 0; i < hours.length; i++) {
       tdEl = document.createElement('td');
-      tdEl.textContent = hours[i] + ': ' +this.cookiesSoldEachHour[i];
+      tdEl.textContent = this.cookiesSoldEachHour[i];
       trEl.appendChild(tdEl);
     }
 
+    // calculate total cookies
     tdEl = document.createElement('td');
-    tdEl.textContent = 'Total: ' + this.totalCookiesPerDay;
+    tdEl.textContent = this.totalCookiesPerDay;
     trEl.appendChild(tdEl);
 
     storeList.appendChild(trEl);
