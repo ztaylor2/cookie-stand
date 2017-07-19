@@ -2,6 +2,27 @@
 
 var hours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'];
 
+var stores = [];
+
+var chatForm = document.getElementById('chatForm');
+
+function Test(event) {
+  event.preventDefault();
+
+  var name = event.target.name.value;
+  var minHourlyCust = parseInt(event.target.minHourlyCust.value);
+  var maxHourlyCust = parseInt(event.target.maxHourlyCust.value);
+  var avgCookiePerSale = parseInt(event.target.avgCookiePerSale.value);
+
+  stores = [];
+
+  new Store(name, minHourlyCust, maxHourlyCust, avgCookiePerSale);
+
+  storeRowsFTW();
+
+}
+
+
 var storeList = document.getElementById('storeList');
 
 // create header row
@@ -88,7 +109,7 @@ function Store(name, minHourlyCust, maxHourlyCust, avgCookiePerSale) {
 
 // array of stores
 
-var stores = [];
+
 new Store('Pike Place', 23, 65, 6.3);
 new Store('Sea-Tac', 3, 24, 1.2);
 new Store('Seattle Center', 11, 38, 3.7);
@@ -99,6 +120,7 @@ new Store('Alki Beach', 2, 16, 4.6);
 // render each row
 
 function storeRowsFTW() {
+
   for(var i = 0; i < stores.length; i++){
     stores[i].render();
   }
@@ -112,12 +134,12 @@ storeRowsFTW();
 var hourTotal = [];
 
 function footer() {
-  var trEl = document.createElement('tr');
+  var tfootEl = document.createElement('tfoot');
 
   // create empty box in bottom left
   var tdEl = document.createElement('td');
   tdEl.textContent = 'Hourly Total';
-  trEl.appendChild(tdEl);
+  tfootEl.appendChild(tdEl);
 
   // calculate and display totals for each hour
   for(var i = 0; i < hours.length; i++) {
@@ -131,7 +153,7 @@ function footer() {
 
     tdEl = document.createElement('td');
     tdEl.textContent = hourTotal[i];
-    trEl.appendChild(tdEl);
+    tfootEl.appendChild(tdEl);
   }
 
   // calculate and display total of totals in bottom right
@@ -141,9 +163,11 @@ function footer() {
   }
   tdEl = document.createElement('td');
   tdEl.textContent = totalOfTotals;
-  trEl.appendChild(tdEl);
+  tfootEl.appendChild(tdEl);
 
-  storeList.appendChild(trEl);
+  storeList.appendChild(tfootEl);
 }
 
 footer();
+
+chatForm.addEventListener('submit', Test);
