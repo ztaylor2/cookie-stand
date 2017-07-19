@@ -99,3 +99,41 @@ function storeRowsFTW() {
 }
 
 storeRowsFTW();
+
+
+// totals in the footer
+
+var hourTotal = [];
+
+function footer() {
+  // create empty box in bottom left
+  var tdEl = document.createElement('td');
+  tdEl.textContent = 'Hourly Total';
+  storeList.appendChild(tdEl);
+
+  // calculate and display totals for each hour
+  for(var i = 0; i < hours.length; i++) {
+
+    var total = 0;
+    for(var x = 0; x < stores.length; x++) {
+      total += stores[x].cookiesSoldEachHour[i];
+    }
+
+    hourTotal.push(total);
+
+    var tdEl = document.createElement('td');
+    tdEl.textContent = hourTotal[i];
+    storeList.appendChild(tdEl);
+  }
+
+  // calculate and display total of totals in bottom right
+  var totalOfTotals = 0;
+  for(var i = 0; i < stores.length; i++) {
+    totalOfTotals += stores[i].totalCookiesPerDay;
+  }
+  var tdEl = document.createElement('td');
+  tdEl.textContent = totalOfTotals;
+  storeList.appendChild(tdEl);
+}
+
+footer();
