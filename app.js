@@ -9,7 +9,7 @@
 var hours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm', '8:00pm'];
 var stores = [];
 var storeList = document.getElementById('storeList');
-var hourTotal = [];
+
 var chatForm = document.getElementById('chatForm');
 
 // constructor funciton
@@ -96,6 +96,32 @@ function header() {
   storeList.appendChild(trEl);
 }
 
+// render store rows
+function storeRowsFTW() {
+  storeList.innerHTML = '';
+  header();
+  for(var i = 0; i < stores.length; i++){
+    stores[i].render();
+  }
+  footer();
+}
+
+// event handler function
+function handleNewStore(event) {
+  event.preventDefault();
+
+  var name = event.target.name.value;
+  var minHourlyCust = parseInt(event.target.minHourlyCust.value);
+  var maxHourlyCust = parseInt(event.target.maxHourlyCust.value);
+  var avgCookiePerSale = parseInt(event.target.avgCookiePerSale.value);
+
+  new Store(name, minHourlyCust, maxHourlyCust, avgCookiePerSale);
+
+  storeRowsFTW();
+
+}
+var hourTotal = [];
+
 // add footer function
 function footer() {
   var tfootEl = document.createElement('tfoot');
@@ -127,30 +153,6 @@ function footer() {
   tfootEl.appendChild(tdEl);
 
   storeList.appendChild(tfootEl);
-}
-
-// render store rows
-function storeRowsFTW() {
-  storeList.innerHTML = '';
-  header();
-  for(var i = 0; i < stores.length; i++){
-    stores[i].render();
-  }
-  footer();
-}
-
-// event handler function
-function handleNewStore(event) {
-  event.preventDefault();
-
-  var name = event.target.name.value;
-  var minHourlyCust = parseInt(event.target.minHourlyCust.value);
-  var maxHourlyCust = parseInt(event.target.maxHourlyCust.value);
-  var avgCookiePerSale = parseInt(event.target.avgCookiePerSale.value);
-
-  new Store(name, minHourlyCust, maxHourlyCust, avgCookiePerSale);
-
-  storeRowsFTW();
 }
 
 //////////////////
