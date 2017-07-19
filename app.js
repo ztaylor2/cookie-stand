@@ -5,22 +5,26 @@ var hours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:0
 // create header row
 
 function header() {
+  var trEl = document.createElement('tr');
+
   // create empty box in top left
   var thEl = document.createElement('th');
-  thEl.textContent = '';
-  storeList.appendChild(thEl);
+  thEl.textContent = 'Location';
+  trEl.appendChild(thEl);
 
   // add hours to header
   for (var i = 0; i < hours.length; i++) {
     var thEl = document.createElement('th');
     thEl.textContent = hours[i];
-    storeList.appendChild(thEl);
+    trEl.appendChild(thEl);
   }
 
   // add total to header
   var thEl = document.createElement('th');
   thEl.textContent = 'Daily Total';
-  storeList.appendChild(thEl);
+  trEl.appendChild(thEl);
+
+  storeList.appendChild(trEl);
 }
 
 header();
@@ -106,10 +110,12 @@ storeRowsFTW();
 var hourTotal = [];
 
 function footer() {
+  var trEl = document.createElement('tr');
+
   // create empty box in bottom left
   var tdEl = document.createElement('td');
   tdEl.textContent = 'Hourly Total';
-  storeList.appendChild(tdEl);
+  trEl.appendChild(tdEl);
 
   // calculate and display totals for each hour
   for(var i = 0; i < hours.length; i++) {
@@ -121,9 +127,9 @@ function footer() {
 
     hourTotal.push(total);
 
-    var tdEl = document.createElement('td');
+    tdEl = document.createElement('td');
     tdEl.textContent = hourTotal[i];
-    storeList.appendChild(tdEl);
+    trEl.appendChild(tdEl);
   }
 
   // calculate and display total of totals in bottom right
@@ -131,9 +137,12 @@ function footer() {
   for(var i = 0; i < stores.length; i++) {
     totalOfTotals += stores[i].totalCookiesPerDay;
   }
-  var tdEl = document.createElement('td');
+  tdEl = document.createElement('td');
   tdEl.textContent = totalOfTotals;
-  storeList.appendChild(tdEl);
+  trEl.appendChild(tdEl);
+
+  storeList.appendChild(trEl);
 }
+
 
 footer();
