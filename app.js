@@ -131,9 +131,12 @@ function footer() {
 
 // render store rows
 function storeRowsFTW() {
+  storeList.innerHTML = '';
+  header();
   for(var i = 0; i < stores.length; i++){
     stores[i].render();
   }
+  footer();
 }
 
 // event handler function
@@ -145,8 +148,6 @@ function handleNewStore(event) {
   var maxHourlyCust = parseInt(event.target.maxHourlyCust.value);
   var avgCookiePerSale = parseInt(event.target.avgCookiePerSale.value);
 
-  stores = [];
-
   new Store(name, minHourlyCust, maxHourlyCust, avgCookiePerSale);
 
   storeRowsFTW();
@@ -156,8 +157,5 @@ function handleNewStore(event) {
 // execute code //
 //////////////////
 
-// function calls
-header();
 storeRowsFTW();
-footer();
 chatForm.addEventListener('submit', handleNewStore);
