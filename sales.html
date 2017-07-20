@@ -5,27 +5,31 @@
     <title>Salmon Cookie Sales</title>
     <style>
       td, th {
-        padding: 10px;
+        padding: 2px;
+      }
+      button {
+        display: block;
+        margin: auto;
       }
     </style>
   </head>
   <body>
     <h1>Salmon Cookie Sales</h1>
-    <form id="chatForm">
+    <form id="newStoreForm">
       <fieldset>
         <legend>Add Data to Table</legend>
 
         <label for="name">Location:</label>
-        <input name="name" type="text">
-
+        <input name="name" type="text" required>
+        <br />
         <label for="minHourlyCust">Minimum Customers Each Hour:</label>
-        <input name="minHourlyCust" type="text">
-
+        <input name="minHourlyCust" type="text" required>
+        <br />
         <label for="maxHourlyCust">Maximum Customers Each Hour:</label>
-        <input name="maxHourlyCust" type="text">
-
+        <input name="maxHourlyCust" type="text" required>
+        <br />
         <label for="avgCookiePerSale">Average Cookies Purchased Per Customer:</label>
-        <input name="avgCookiePerSale" type="text">
+        <input name="avgCookiePerSale" type="text" required>
 
         <button type="submit">Submit</button>
       </fieldset>
