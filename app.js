@@ -19,13 +19,8 @@ function Store(name, minHourlyCust, maxHourlyCust, avgCookiePerSale) {
   this.avgCookiePerSale = avgCookiePerSale;
 
   this.customersPerHour = [];
-  this.calcCustomersPerHour();
-
   this.cookiesSoldEachHour = [];
-  this.calcCookiesSoldEachHour();
-
-  this.totalCookiesPerDay = 0;
-  this.render();
+  this.totalCookiesPerDay;
 
   stores.push(this);
 }
@@ -38,12 +33,14 @@ Store.prototype.calcCustomersPerHour = function() {
 };
 Store.prototype.calcCookiesSoldEachHour = function() {
   this.calcCustomersPerHour();
+
   for(var i = 0; i < hours.length; i++) {
     this.cookiesSoldEachHour.push(Math.ceil(this.customersPerHour[i] * this.avgCookiePerSale));
     this.totalCookiesPerDay += this.cookiesSoldEachHour[i];
   }
 };
 Store.prototype.render = function() {
+  this.totalCookiesPerDay = 0;
   this.calcCookiesSoldEachHour();
 
   var trEl = document.createElement('tr');
@@ -146,6 +143,7 @@ function storeRowsFTW() {
 
 // event handler function
 function handleNewStore(event) {
+
   event.preventDefault();
 
   var name = event.target.name.value;
@@ -153,8 +151,24 @@ function handleNewStore(event) {
   var maxHourlyCust = parseInt(event.target.maxHourlyCust.value);
   var avgCookiePerSale = parseInt(event.target.avgCookiePerSale.value);
 
-  new Store(name, minHourlyCust, maxHourlyCust, avgCookiePerSale);
+  for(var i = 0; i < stores.length; i++) {
 
+    if(stores[i].name === name) {
+      stores[i].name = name;
+      stores[i].minHourlyCust = minHourlyCust;
+      stores[i].maxHourlyCust = maxHourlyCust;
+      stores[i].avgCookiePerSale = avgCookiePerSale;
+
+      stores[i].customersPerHour = [];
+      stores[i].cookiesSoldEachHour = [];
+      stores[i].totalCookiesPerDay = 0;
+
+      storeRowsFTW();
+      return;
+    }
+  }
+
+  new Store(name, minHourlyCust, maxHourlyCust, avgCookiePerSale);
   storeRowsFTW();
 
 }
