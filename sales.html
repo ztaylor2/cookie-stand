@@ -3,18 +3,33 @@
   <head>
     <meta charset="utf-8">
     <title>Salmon Cookie Sales</title>
-    <style>
-      td, th {
-        padding: 10px;
-      }
-    </style>
+    <link rel="stylesheet" href="sales-style.css">
   </head>
   <body>
     <h1>Salmon Cookie Sales</h1>
-    <table id="storeList" border="1px solid black">
+    <form id="newStoreForm">
+      <fieldset>
+        <legend>Add Data to Table</legend>
 
-    </table>
+        <label for="name">Location:</label>
+        <input name="name" type="text" required>
+        <br />
+        <label for="minHourlyCust">Minimum Customers Each Hour:</label>
+        <input name="minHourlyCust" type="text" required>
+        <br />
+        <label for="maxHourlyCust">Maximum Customers Each Hour:</label>
+        <input name="maxHourlyCust" type="text" required>
+        <br />
+        <label for="avgCookiePerSale">Average Cookies Purchased Per Customer:</label>
+        <input name="avgCookiePerSale" type="text" required>
 
+        <button type="submit">Submit</button>
+      </fieldset>
+    </form>
+
+    <main>
+      <table id="storeList" border="1px solid black"></table>
+    </main>
   <script src="app.js"></script>
   </body>
 </html>
