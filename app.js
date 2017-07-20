@@ -44,29 +44,29 @@ Store.prototype.calcCookiesSoldEachHour = function() {
   }
 };
 Store.prototype.render = function() {
-    this.calcCookiesSoldEachHour();
+  this.calcCookiesSoldEachHour();
 
-    var trEl = document.createElement('tr');
+  var trEl = document.createElement('tr');
 
-    // add name to beginning of table row
-    var tdEl = document.createElement('td');
-    tdEl.textContent = this.name;
-    trEl.appendChild(tdEl);
+  // add name to beginning of table row
+  var tdEl = document.createElement('td');
+  tdEl.textContent = this.name;
+  trEl.appendChild(tdEl);
 
-    // add table data for each hour
-    for (var i = 0; i < hours.length; i++) {
-      tdEl = document.createElement('td');
-      tdEl.textContent = this.cookiesSoldEachHour[i];
-      trEl.appendChild(tdEl);
-    }
-
-    // calculate total cookies
+  // add table data for each hour
+  for (var i = 0; i < hours.length; i++) {
     tdEl = document.createElement('td');
-    tdEl.textContent = this.totalCookiesPerDay;
+    tdEl.textContent = this.cookiesSoldEachHour[i];
     trEl.appendChild(tdEl);
+  }
 
-    storeList.appendChild(trEl);
-  };
+  // calculate total cookies
+  tdEl = document.createElement('td');
+  tdEl.textContent = this.totalCookiesPerDay;
+  trEl.appendChild(tdEl);
+
+  storeList.appendChild(trEl);
+};
 
 // array of stores
 new Store('Pike Place', 23, 65, 6.3);
@@ -88,12 +88,12 @@ function header() {
   trEl.appendChild(thEl);
   // add hours to header
   for (var i = 0; i < hours.length; i++) {
-    var thEl = document.createElement('th');
+    thEl = document.createElement('th');
     thEl.textContent = hours[i];
     trEl.appendChild(thEl);
   }
   // add total to header
-  var thEl = document.createElement('th');
+  thEl = document.createElement('th');
   thEl.textContent = 'Daily Total';
   trEl.appendChild(thEl);
 
